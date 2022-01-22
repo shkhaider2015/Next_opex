@@ -6,9 +6,9 @@ import OpexFlowPNG from "../../Assets/SVGs/opex-flow-png-file.png"
 import { MAIN_COLORS } from "../../Assets/Constant";
 import { OpexButton } from '../Button';
 
-const Navbar = () => {
+const Navbar = (props) => {
     return <NavbarWrapper>
-        <div className='svg-menu' >
+        <div className='svg-menu' onClick={() => props.onClick() } >
             <LeftMenuSVG className="left-svg" />
             &nbsp;
             <SingleMenuSVG className="right-svg" />
@@ -44,11 +44,17 @@ background-color: #FFFFFF;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-border: 1px solid red;
 padding-left: 2%;
 padding-top: 2%;
 padding-right: 2%;
 padding-bottom: 1%;
+
+box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.39);
+-webkit-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.39);
+-moz-box-shadow: 0px 1px 3px 1px rgba(0,0,0,0.39);
+
+position: relative;
+z-index: 10;
 
 .svg-menu {
     display: flex;

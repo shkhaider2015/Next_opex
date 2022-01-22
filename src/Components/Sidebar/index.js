@@ -8,17 +8,16 @@ const slidebarData = [
         text: 'Marketplace'
     },
     {
-        icon: 'iconsminds-factory',
+        icon: 'iconsminds-speach-bubble',
         text: 'Chat'
     },
     {
-        icon: 'iconsminds-factory',
+        icon: 'iconsminds-library',
         text: 'Marketplace'
     }
 ]
 
 const SlidebarItem = ({ icon, text, isSelected, index }) => {
-    console.log("IsSelected : ", isSelected)
     return <SlidebarItemWrapper isSelected={isSelected === index} >
             <div className='item-vertical-line' />
             <div className='logo-section' >
@@ -28,11 +27,11 @@ const SlidebarItem = ({ icon, text, isSelected, index }) => {
     </SlidebarItemWrapper>
 }
 
-export const OpexSlidebar = () => {
+export const OpexSlidebar = (props) => {
 
-    const [isSelected, setIsSelected] = useState(-1);
+    const [isSelected, setIsSelected] = useState(0);
 
-    return <OpexSlidebarWrapper>
+    return <OpexSlidebarWrapper isSidebar={props.isSidebar} >
       
         {
             slidebarData.map((item, index) => 
@@ -49,15 +48,26 @@ export const OpexSlidebar = () => {
                 </div>
              )
         }
+        {/* <div className='sidebar-item' isSelected={false} >
+            <div className='item-vertical-line' />
+            <div className='logo-section' >
+                <div className={`side-icon iconsminds-factory`}/>
+                <div className='side-logo-text'>text</div>
+            </div>
+    </div> */}
         
     </OpexSlidebarWrapper>
 }
 
 const OpexSlidebarWrapper = styled.div`
- width: 10%;
- min-height: 86vh;
+ width: ${props => props.isSidebar ? '10' : '0' }% ;
+ min-height: 88vh;
  background-color: white;
  padding-top: 3%;
+ position: fixed;
+ margin-left: ${props => props.isSidebar ? '0' : '-10' }%;
+
+ transition: width 1.1s, margin-left 1.1s;
 
  .hr-line {
      opacity: .3;
@@ -69,9 +79,9 @@ const OpexSlidebarWrapper = styled.div`
 const SlidebarItemWrapper = styled.div`
 
      display: flex;
-     flex-direction: row;
      width: 100%;
      padding-top: 1%;
+     position: relative;
 
      .item-vertical-line {
          border-right-width: 7px ;
@@ -90,11 +100,11 @@ const SlidebarItemWrapper = styled.div`
 
          .side-icon {
              font-size: 40px;
-             opacity: .5;
+             opacity: ${props => props.isSelected ? 1 : .5 } ;
          }
          .side-logo-text {
              font-weight: normal;
-             opacity: .5;
+             opacity: ${props => props.isSelected ? 1 : .5 } ;
          }
      }
 
