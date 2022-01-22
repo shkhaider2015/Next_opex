@@ -69,5 +69,6 @@ import styles from '../styles/Home.module.css'
 // }
 
 
-import Index from "../src/index";
-export default Index;
+
+import Home from "../src/Screens/Home";
+export default Home;
