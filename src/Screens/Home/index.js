@@ -12,7 +12,7 @@ const HomeScreen = () => {
         <Navbar onClick={() => setIsSidebar(!isSidebar)} />
         <div className='home-content' >
         <OpexSlidebar isSidebar={isSidebar} />
-        <HomeContent />
+        <HomeContent isSidebar={isSidebar} />
         </div>
     </HomeScreenWrapper>
 }

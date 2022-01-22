@@ -5,8 +5,13 @@ import SingleMenuSVG from "../../Assets/assets/img/menu-single.svg"
 import OpexFlowPNG from "../../Assets/SVGs/opex-flow-png-file.png"
 import { MAIN_COLORS } from "../../Assets/Constant";
 import { OpexButton } from '../Button';
+import { useState } from 'react';
+import { OpexDropdown } from '../Dropdown';
 
 const Navbar = (props) => {
+    const [isNotificationDropdown, setIsNotificationDropdown] = useState(false);
+    const [isMenu, setIsMenu] = useState(false);
+
     return <NavbarWrapper>
         <div className='svg-menu' onClick={() => props.onClick() } >
             <LeftMenuSVG className="left-svg" />
@@ -19,12 +24,19 @@ const Navbar = (props) => {
         </div>
 
         <div className='right-section' >
-        <span>
-        <i className="simple-icon-bell" />
-        </span>
-        <span>
-        <i className="simple-icon-grid" />
-        </span>
+        <div >
+        <i className="simple-icon-bell top-right-icon" onClick={() => setIsNotificationDropdown(!isNotificationDropdown) } />
+        <OpexDropdown
+          isOpen={isNotificationDropdown}
+          setIsOpen={setIsNotificationDropdown} />
+        </div>
+        <div>
+        <i className="simple-icon-grid top-right-icon " onClick={() => setIsMenu(!isMenu) } />
+        <OpexDropdown 
+            isOpen={isMenu}
+            setIsOpen={setIsMenu}
+        />
+        </div>
             <div className='user-btn' >
                 <OpexButton 
                 text={"Sign In"}
@@ -100,8 +112,20 @@ z-index: 10;
 .right-section .user-btn {
     width: 50%;
     height: 80%;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.right-section .top-right-icon {
+    &:hover {
+        color : ${MAIN_COLORS.PRIMARY_COLOR};
+        cursor: pointer;
+    }
 }
 
-`
+
+
+`;
 
 export default Navbar;
