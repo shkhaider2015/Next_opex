@@ -6,7 +6,7 @@ import { OpexSlidebar } from '../../Components/Sidebar';
 import { HomeContent } from './UI/content';
 
 const HomeScreen = () => {
-    const [isSidebar, setIsSidebar] = useState(false);
+    const [isSidebar, setIsSidebar] = useState(true);
 
     return <HomeScreenWrapper >
         <Navbar onClick={() => setIsSidebar(!isSidebar)} />

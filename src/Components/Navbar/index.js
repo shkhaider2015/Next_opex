@@ -5,12 +5,23 @@ import SingleMenuSVG from "../../Assets/assets/img/menu-single.svg"
 import OpexFlowPNG from "../../Assets/SVGs/opex-flow-png-file.png"
 import { MAIN_COLORS } from "../../Assets/Constant";
 import { OpexButton } from '../Button';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { OpexDropdown } from '../Dropdown';
+import { useOnClickOutside } from '../../Hooks/outsideClick';
 
 const Navbar = (props) => {
     const [isNotificationDropdown, setIsNotificationDropdown] = useState(false);
     const [isMenu, setIsMenu] = useState(false);
+    const menuRef = useRef(null);
+    const notificationRef = useRef(null);
+
+    const handleMenuOutside = () => {
+        setIsMenu(false);
+        setIsNotificationDropdown(false);
+    }
+
+    useOnClickOutside(menuRef, () => setIsMenu(false) )
+    useOnClickOutside(notificationRef,() => setIsNotificationDropdown(false) )
 
     return <NavbarWrapper>
         <div className='svg-menu' onClick={() => props.onClick() } >
@@ -24,20 +35,20 @@ const Navbar = (props) => {
         </div>
 
         <div className='right-section' >
-        <div >
+        <div ref={notificationRef} >
         <i className="simple-icon-bell top-right-icon" onClick={() => setIsNotificationDropdown(!isNotificationDropdown) } />
         <OpexDropdown
           isOpen={isNotificationDropdown}
           setIsOpen={setIsNotificationDropdown} />
         </div>
-        <div>
+        <div ref={menuRef} >
         <i className="simple-icon-grid top-right-icon " onClick={() => setIsMenu(!isMenu) } />
         <OpexDropdown 
             isOpen={isMenu}
             setIsOpen={setIsMenu}
         />
         </div>
-            <div className='user-btn' >
+            <div className='user-btn'>
                 <OpexButton 
                 text={"Sign In"}
                 backgroundColor={MAIN_COLORS.PRIMARY_COLOR}

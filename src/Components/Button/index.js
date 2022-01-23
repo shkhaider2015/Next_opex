@@ -20,4 +20,8 @@ const OpexButtonWrapper = styled.div`
     border-radius: 50px;
     border: 1px solid ${props => props.borderColor ? props.borderColor : props.backgroundColor ? props.backgroundColor : MAIN_COLORS.WHITE };
     font-weight: bold;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
